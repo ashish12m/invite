@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khushboo & Ashish — The Grand Bahubali, Balotra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage: #9CAF88;
+      --sage-light: #B8C9A8;
+      --sage-dark: #7A8F6B;
+      --white: #FDFDFB;
+      --black: #1A1A1A;
+      --gold: #C9A962;
+      --gold-light: #E2D4A8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 2rem;
+    }
+
+    section {
+      scroll-margin-top: 2rem;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.7;
+      font-weight: 400;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Hero / Envelope Section */
+    .hero-envelope {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(165deg, var(--white) 0%, var(--sage-light) 40%, var(--sage) 100%);
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
+    }
+
+    .hero-envelope.revealed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0;
+      min-height: 0;
+      overflow: hidden;
+      transform: translateY(-100vh);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease, height 0.5s ease;
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .envelope-visual {
+      width: min(340px, 92vw);
+      position: relative;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.15));
+    }
+
+    .envelope-body {
+      background: linear-gradient(145deg, var(--sage) 0%, var(--sage-dark) 100%);
+      padding: 2.5rem 2rem 3.5rem;
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      border: 2px solid var(--sage-dark);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: -2px;
+      left: 0;
+      right: 0;
+      height: 55%;
+      background: linear-gradient(180deg, var(--sage-light) 0%, var(--sage) 50%, var(--sage-dark) 100%);
+      clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+      border: 2px solid var(--sage-dark);
+      border-bottom: none;
+      pointer-events: none;
+    }
+
+    .wax-seal {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 56px;
+      height: 56px;
+      background: radial-gradient(circle at 30% 30%, var(--gold-light), var(--gold) 50%, #A68B4B 100%);
+      border-radius: 50%;
+      box-shadow: 
+        0 4px 15px rgba(0,0,0,0.3),
+        inset 2px 2px 4px rgba(255,255,255,0.4),
+        inset -2px -2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .wax-seal-inner {
+      width: 20px;
+      height: 20px;
+      background: var(--black);
+      border-radius: 50%;
+    }
+
+    .envelope-florals {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .envelope-florals svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .envelope-text {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .envelope-text h2 {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      color: var(--black);
+      margin-bottom: 2rem;
+    }
+
+    .open-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .open-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+      transform: scale(1.02);
+    }
+
+    /* Save the Date Reveal */
+    .save-the-date {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      padding: 4rem 2rem;
+      position: relative;
+    }
+
+    .save-the-date-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+    }
+
+    @media (max-width: 768px) {
+      .save-the-date-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .save-the-date-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .save-the-date-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    .save-the-date-text {
+      color: var(--white);
+    }
+
+    .save-the-date-text h2 {
+      font-size: clamp(0.9rem, 2vw, 1rem);
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      margin-bottom: 1rem;
+      color: var(--sage-light);
+    }
+
+    .save-the-date-text .names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+
+    .save-the-date-text .date,
+    .save-the-date-text .location {
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      opacity: 0.95;
+    }
+
+    .save-the-date-text .date {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Quick Links Dashboard */
+    .quick-links {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .link-card {
+      background: var(--white);
+      border: 1px solid rgba(156, 175, 136, 0.4);
+      padding: 2rem;
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 
+        0 4px 20px rgba(0,0,0,0.06),
+        0 1px 3px rgba(0,0,0,0.04);
+    }
+
+    .link-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .link-card:nth-child(odd) {
+      transform: rotate(-0.5deg);
+    }
+
+    .link-card:nth-child(even) {
+      transform: rotate(0.5deg);
+    }
+
+    .link-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px) rotate(0deg) !important;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+    }
+
+    .link-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .link-card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+
+    .link-card p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .rsvp-note {
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: 0.5rem;
+      color: var(--sage-dark);
+    }
+
+    .rsvp-section,
+    .travel-section {
+      padding: 5rem 2rem;
+      background: var(--white);
+    }
+
+    .rsvp-section {
+      border-top: 1px solid rgba(156, 175, 136, 0.2);
+    }
+
+    .rsvp-content,
+    .travel-content {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    .rsvp-content p,
+    .travel-content p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .rsvp-cta {
+      font-style: italic;
+      color: var(--sage-dark);
+    }
+
+    /* The Finer Details */
+    .finer-details {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, var(--white) 0%, var(--sage-light) 15%, var(--sage) 50%, var(--sage-dark) 100%);
+    }
+
+    .finer-details-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .finer-details .theme {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .finer-details p {
+      font-size: 1.05rem;
+      color: var(--black);
+      opacity: 0.95;
+    }
+
+    /* Dress Code */
+    .dress-code {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+
+    .dress-code-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 900px;
+      margin: 2rem auto 0;
+    }
+
+    @media (max-width: 768px) {
+      .dress-code-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dress-category h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 1rem;
+    }
+
+    .dress-lineup {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .dress-img {
+      width: 70px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .suit-img {
+      width: 65px;
+      height: 95px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .dress-code p {
+      font-size: 0.95rem;
+      color: var(--black);
+      opacity: 0.9;
+    }
+
+    /* Schedule */
+    .schedule {
+      padding: 6rem 2rem;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .schedule-timeline {
+      max-width: 600px;
+      margin: 2rem auto 0;
+    }
+
+    .schedule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .schedule-item:last-child {
+      border-bottom: none;
+    }
+
+    .schedule-icon {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      background: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .schedule-icon.bus::before { content: '🚐'; }
+    .schedule-icon.ceremony::before { content: '💍'; }
+    .schedule-icon.reception::before { content: '🥂'; }
+
+    .schedule-text h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .schedule-text .time {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Our Story */
+    .our-story {
+      padding: 6rem 2rem;
+      background: var(--white);
+    }
+
+    .story-content {
+      max-width: 650px;
+      margin: 2rem auto 0;
+    }
+
+    .story-content p {
+      margin-bottom: 1.5rem;
+      font-size: 1.05rem;
+    }
+
+    .story-content p:first-child::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      float: left;
+      line-height: 1;
+      margin-right: 0.5rem;
+      color: var(--gold);
+    }
+
+    /* FAQs */
+    .faqs {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, var(--white) 0%, var(--sage-light) 30%, var(--sage-light) 100%);
+    }
+
+    .faq-list {
+      max-width: 640px;
+      margin: 2.5rem auto 0;
+    }
+
+    .faq-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(156, 175, 136, 0.35);
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+      line-height: 1.45;
+      padding-left: 1.5rem;
+      border-left: 3px solid var(--gold);
+    }
+
+    .faq-answer p {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--black);
+      opacity: 0.9;
+      padding-left: 1.5rem;
+      border-left: 3px solid transparent;
+    }
+
+    /* Scroll Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: var(--black);
+      color: var(--white);
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <!-- 1. Interactive Hero - The Digital Envelope -->
+  <section class="hero-envelope" id="hero-envelope">
+    <div class="envelope-wrapper animate-on-scroll">
+      <div class="envelope-visual">
+        <div class="envelope-florals">
+          <svg viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 25c0-5 5-10 15-10 5 0 10 2 15 5-3-8 0-15 5-18 3-2 8 0 10 5 2 8-2 15-5 18-5 3-10 5-15 5-10 0-20-5-20-5z" fill="white" opacity="0.9"/>
+            <path d="M120 20c-5 5-5 15 0 20 5 5 15 5 20 0 5-5 5-15 0-20s-15-5-20 0z" fill="white" opacity="0.85"/>
+            <path d="M150 15l5 20 10-15-10-5-5 0z" fill="white" opacity="0.8"/>
+            <path d="M200 25c0-5 5-10 15-10 5 0 10 2 15 5-3-8 0-15 5-18 3-2 8 0 10 5 2 8-2 15-5 18-5 3-10 5-15 5-10 0-20-5-20-5z" fill="white" opacity="0.9"/>
+            <path d="M250 22c-2 2-2 6 0 8 2 2 6 2 8 0 2-2 2-6 0-8s-6-2-8 0z" fill="white" opacity="0.75"/>
+          </svg>
+        </div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-body">
+          <div class="envelope-text">
+            <h2>THE COUNTDOWN TO FOREVER BEGINS NOW</h2>
+            <button class="open-btn" onclick="openInvitation()">CLICK TO OPEN!</button>
+          </div>
+        </div>
+        <div class="wax-seal">
+          <div class="wax-seal-inner"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Save the Date Reveal -->
+  <section class="save-the-date" id="save-the-date">
+    <div class="save-the-date-content animate-on-scroll">
+      <div class="save-the-date-image">
+        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80" alt="Engagement ring on couple's hands">
+      </div>
+      <div class="save-the-date-text">
+        <h2>SAVE THE DATE</h2>
+        <p class="names">KHUSHBOO & ASHISH</p>
+        <p class="date">30 APRIL – 1 MAY, 2026</p>
+        <p class="location">THE GRAND BAHUBALI — TGB, BALOTRA, RAJASTHAN</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Quick Links Dashboard -->
+  <section class="quick-links" id="quick-links">
+    <h2 class="section-heading animate-on-scroll">QUICK LINKS</h2>
+    <div class="links-grid">
+      <a href="#rsvp" class="link-card animate-on-scroll">
+        <h3>SOFT RSVP</h3>
+        <p>Let us know your plans so we can prepare for your arrival.</p>
+        <p class="rsvp-note">We kindly ask that you RSVP early to help us with planning—your response means the world to us!</p>
+      </a>
+      <a href="#travel" class="link-card animate-on-scroll">
+        <h3>TRAVEL & ACCOMMODATIONS</h3>
+        <p>Everything you need to plan your journey to paradise.</p>
+      </a>
+      <a href="#finer-details" class="link-card animate-on-scroll">
+        <h3>THE FINER DETAILS</h3>
+        <p>What to expect on our magical evening.</p>
+      </a>
+      <a href="#faqs" class="link-card animate-on-scroll">
+        <h3>FAQs</h3>
+        <p>Answers to the questions we know you'll have.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- RSVP Section -->
+  <section class="rsvp-section" id="rsvp">
+    <h2 class="section-heading animate-on-scroll">SOFT RSVP</h2>
+    <div class="rsvp-content animate-on-scroll">
+      <p>We're so excited to celebrate with you at The Grand Bahubali! To help us plan the perfect evening, please let us know as soon as possible whether you'll be able to join us. Your early response allows us to finalize accommodations, seating, and all the special details we're dreaming up for you.</p>
+      <p class="rsvp-cta">Form coming soon — for now, reach out to us directly to confirm your attendance.</p>
+    </div>
+  </section>
+
+  <!-- Travel Section -->
+  <section class="travel-section" id="travel">
+    <h2 class="section-heading animate-on-scroll">TRAVEL & ACCOMMODATIONS</h2>
+    <div class="travel-content animate-on-scroll">
+      <p>The Grand Bahubali is located in Balotra, Rajasthan—easily accessible by road from Jodhpur, Jaisalmer, and other major cities. We recommend planning your travel in advance.</p>
+      <p>We're working with the venue to secure accommodations for our guests—details and preferred rates will be shared soon. Balotra offers a serene setting in the heart of Rajasthan, perfect for celebrating together.</p>
+    </div>
+  </section>
+
+  <!-- 4. The Finer Details -->
+  <section class="finer-details" id="finer-details">
+    <h2 class="section-heading animate-on-scroll">THE FINER DETAILS</h2>
+    <div class="finer-details-content animate-on-scroll">
+      <p class="theme">"Sunset Over the Thar"</p>
+      <p>As the golden hour paints the sky in shades of amber and rose, we'll gather for an evening that promises to be nothing short of magical. You'll be greeted with a refreshing welcome drink as you arrive, followed by an intimate dinner crafted with the finest flavors—all while the sun dips below the horizon and casts its glow across the Rajasthani landscape. When night falls, we'll dance under a canopy of stars. This is our dream: celebrating with you at The Grand Bahubali in Balotra.</p>
+    </div>
+  </section>
+
+  <!-- 5. Dress Code -->
+  <section class="dress-code" id="dress-code">
+    <h2 class="section-heading animate-on-scroll">DRESS CODE</h2>
+    <div class="dress-code-grid">
+      <div class="dress-category animate-on-scroll">
+        <h3>FOR THE LADIES</h3>
+        <div class="dress-lineup">
+          <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=140&q=80" alt="Blush dress" class="dress-img">
+          <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=140&q=80" alt="Terracotta dress" class="dress-img">
+          <img src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=140&q=80" alt="Peach dress" class="dress-img">
+          <img src="https://images.unsplash.com/photo-1594552072238-f6392c5d359d?w=140&q=80" alt="Sunset hues dress" class="dress-img">
+          <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=140&q=80" alt="Warm neutrals dress" class="dress-img">
+        </div>
+        <p><strong>Summer Formal.</strong> Think sunset hues, terracotta, blush, peach, and warm neutrals. Elegant flowing silhouettes that move with the desert breeze.</p>
+      </div>
+      <div class="dress-category animate-on-scroll">
+        <h3>FOR THE GENTLEMEN</h3>
+        <div class="dress-lineup">
+          <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=140&q=80" alt="Navy suit" class="suit-img">
+          <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=140&q=80" alt="Light blue suit" class="suit-img">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=140&q=80" alt="Summer suit" class="suit-img">
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=140&q=80" alt="Neutral suit" class="suit-img">
+        </div>
+        <p><strong>Summer Formal.</strong> Navy, light blues, and warm neutrals. A well-tailored summer suit or blazer will feel right at home as the evening cools.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Wedding Day Schedule -->
+  <section class="schedule" id="schedule">
+    <h2 class="section-heading animate-on-scroll">WEDDING DAY SCHEDULE</h2>
+    <div class="schedule-timeline">
+      <div class="schedule-item animate-on-scroll">
+        <div class="schedule-icon bus"></div>
+        <div class="schedule-text">
+          <h4>Shuttle Departure</h4>
+          <p class="time">Details to follow</p>
+        </div>
+      </div>
+      <div class="schedule-item animate-on-scroll">
+        <div class="schedule-icon ceremony"></div>
+        <div class="schedule-text">
+          <h4>Ceremony</h4>
+          <p class="time">Details to follow</p>
+        </div>
+      </div>
+      <div class="schedule-item animate-on-scroll">
+        <div class="schedule-icon reception"></div>
+        <div class="schedule-text">
+          <h4>Reception</h4>
+          <p class="time">Details to follow</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Our Story -->
+  <section class="our-story" id="our-story">
+    <h2 class="section-heading animate-on-scroll">OUR STORY</h2>
+    <div class="story-content animate-on-scroll">
+      <p>It started with a chance encounter—a mutual friend's gathering where laughter flowed as easily as the wine. Khushboo noticed Ashish's quick wit; Ashish was drawn to Khushboo's smile. By the end of the night, they knew they had to see each other again.</p>
+      <p>Their first dates were a blend of adventure and comfort: cozy dinners that stretched for hours, spontaneous road trips, and lazy Sunday mornings that felt like a promise of something more. Every moment together reinforced what they already suspected—this was different.</p>
+      <p>Travel became their love language. From mountains to coastlines, they discovered that the best part of any destination was experiencing it side by side. Rajasthan had always held a special place in their hearts, and when the time came to choose where to say "I do," The Grand Bahubali in Balotra felt like the perfect answer.</p>
+      <p>The proposal was intimate and unforgettable—a private moment by the water as the sun set, with a ring that symbolized the beginning of forever. Now, they can't wait to celebrate that same love with the people who mean the most, in the place that feels like magic.</p>
+    </div>
+  </section>
+
+  <!-- 8. FAQs -->
+  <section class="faqs" id="faqs">
+    <h2 class="section-heading animate-on-scroll">FREQUENTLY ASKED QUESTIONS</h2>
+    <div class="faq-list">
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">Where will the wedding take place?</div>
+        <div class="faq-answer"><p>Yes! We're getting married at The Grand Bahubali (TGB) in Balotra, Rajasthan—a beautiful venue in the heart of the desert. We can't wait to share this experience with you.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">Are kids welcome?</div>
+        <div class="faq-answer"><p>This is an adults-only (21+) celebration. We've designed the evening so that everyone can relax, unwind, and fully enjoy the festivities without little ones in tow.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">What is the dress code?</div>
+        <div class="faq-answer"><p>Summer Formal. Think elegant and comfortable—sundresses, light suits, and breathable fabrics. Rajasthan evenings can be pleasant; we recommend bringing a light layer (shawl or blazer) for when the sun sets.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">May I bring a guest?</div>
+        <div class="faq-answer"><p>Due to the intimate nature of our venue and space constraints, we ask that only those specifically named on your invitation attend. We wish we could celebrate with everyone!</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">What kind of food will be served?</div>
+        <div class="faq-answer"><p>Expect a rich menu with Indian and regional flavors—seasonal produce and dishes that celebrate the best of Rajasthani hospitality. We're excited to treat you to an unforgettable dining experience.</p></div>
+      </div>
+      <div class="faq-item animate-on-scroll">
+        <div class="faq-question">Will transportation be provided?</div>
+        <div class="faq-answer"><p>Yes! Shuttles will be available to transport guests to and from the venue. Specific pickup times and locations will be shared closer to the date.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Khushboo & Ashish · 30 April – 1 May, 2026 · The Grand Bahubali, Balotra, Rajasthan</p>
+  </footer>
+
+  <script>
+    function openInvitation() {
+      const hero = document.getElementById('hero-envelope');
+      const saveTheDate = document.getElementById('save-the-date');
+      const saveTheDateContent = saveTheDate.querySelector('.save-the-date-content');
+
+      hero.classList.add('revealed');
+      if (saveTheDateContent) saveTheDateContent.classList.add('visible');
+
+      setTimeout(() => {
+        saveTheDate.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+  </script>
+</body>
+</html>
