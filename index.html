@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#9CAF88">
   <title>Khushboo & Ashish — The Grand Bahubali, Balotra</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +28,7 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 0;
+      -webkit-overflow-scrolling: touch;
     }
 
     section.scroll-page {
@@ -48,6 +50,8 @@
       font-weight: 400;
       overflow-x: hidden;
       position: relative;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-text-size-adjust: 100%;
     }
 
     h1, h2, h3 {
@@ -57,12 +61,17 @@
     /* Hero / Envelope Section */
     .hero-envelope {
       min-height: 100vh;
+      min-height: 100dvh;
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       background: linear-gradient(165deg, var(--white) 0%, var(--sage-light) 40%, var(--sage) 100%);
       padding: 2rem;
+      padding-left: max(1rem, env(safe-area-inset-left));
+      padding-right: max(1rem, env(safe-area-inset-right));
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
       position: relative;
       transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease;
     }
@@ -175,6 +184,8 @@
     .open-btn {
       display: inline-block;
       padding: 1rem 2.5rem;
+      min-height: 48px;
+      min-width: 44px;
       background: var(--black);
       color: var(--white);
       font-family: 'Cormorant Garamond', serif;
@@ -184,6 +195,7 @@
       border: none;
       cursor: pointer;
       transition: all 0.3s ease;
+      touch-action: manipulation;
     }
 
     .open-btn:hover {
@@ -214,6 +226,12 @@
     @media (max-width: 768px) {
       .save-the-date-content {
         grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .save-the-date {
+        padding: 2rem 1rem;
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
       }
     }
 
@@ -378,33 +396,6 @@
       color: var(--sage-dark);
     }
 
-    /* The Finer Details */
-    .finer-details {
-      padding: 6rem 2rem;
-      background: linear-gradient(180deg, var(--white) 0%, var(--sage-light) 15%, var(--sage) 50%, var(--sage-dark) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .finer-details-content {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .finer-details .theme {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem;
-      letter-spacing: 0.1em;
-      color: var(--black);
-      margin-bottom: 1.5rem;
-    }
-
-    .finer-details p {
-      font-size: 1.05rem;
-      color: var(--black);
-      opacity: 0.95;
-    }
-
     /* Dress Code */
     .dress-code {
       padding: 6rem 2rem;
@@ -511,74 +502,6 @@
       opacity: 0.8;
     }
 
-    /* Our Story */
-    .our-story {
-      padding: 6rem 2rem;
-      background: var(--white);
-      min-height: 100vh;
-    }
-
-    .story-content {
-      max-width: 650px;
-      margin: 2rem auto 0;
-    }
-
-    .story-content p {
-      margin-bottom: 1.5rem;
-      font-size: 1.05rem;
-    }
-
-    .story-content p:first-child::first-letter {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 3.5rem;
-      float: left;
-      line-height: 1;
-      margin-right: 0.5rem;
-      color: var(--gold);
-    }
-
-    /* FAQs */
-    .faqs {
-      padding: 6rem 2rem;
-      background: linear-gradient(180deg, var(--white) 0%, var(--sage-light) 30%, var(--sage-light) 100%);
-      min-height: 100vh;
-    }
-
-    .faq-list {
-      max-width: 640px;
-      margin: 2.5rem auto 0;
-    }
-
-    .faq-item {
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(156, 175, 136, 0.35);
-    }
-
-    .faq-item:last-child {
-      border-bottom: none;
-    }
-
-    .faq-question {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      color: var(--black);
-      margin-bottom: 0.75rem;
-      line-height: 1.45;
-      padding-left: 1.5rem;
-      border-left: 3px solid var(--gold);
-    }
-
-    .faq-answer p {
-      font-size: 0.98rem;
-      line-height: 1.8;
-      color: var(--black);
-      opacity: 0.9;
-      padding-left: 1.5rem;
-      border-left: 3px solid transparent;
-    }
-
     /* Scroll Animations */
     .animate-on-scroll {
       opacity: 0;
@@ -659,6 +582,134 @@
       opacity: 0.9;
     }
 
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      .hero-envelope {
+        padding: 1.5rem 1rem;
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+      }
+      .envelope-body {
+        padding: 1.75rem 1.5rem 2.5rem;
+      }
+      .envelope-text h2 {
+        font-size: 0.75rem;
+        letter-spacing: 0.2em;
+        margin-bottom: 1.5rem;
+      }
+      .open-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+        letter-spacing: 0.15em;
+      }
+      .section-heading {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        letter-spacing: 0.1em;
+        margin-bottom: 2rem;
+      }
+      .quick-links,
+      .rsvp-section,
+      .travel-section,
+      .schedule,
+      .dress-code {
+        padding: 3rem 1rem;
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+      }
+      .links-grid {
+        gap: 1.25rem;
+        padding: 0 0.5rem;
+      }
+      .link-card {
+        padding: 1.5rem;
+        min-height: 44px;
+      }
+      .link-card h3 {
+        font-size: 1rem;
+        letter-spacing: 0.1em;
+      }
+      .schedule-item {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem 0;
+      }
+      .schedule-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 1.25rem;
+      }
+      .rsvp-content,
+      .travel-content {
+        padding: 0 0.25rem;
+      }
+      .rsvp-content p,
+      .travel-content p {
+        font-size: 1rem;
+      }
+      .save-the-date-text .names {
+        font-size: clamp(1.75rem, 8vw, 3rem);
+        letter-spacing: 0.05em;
+      }
+      .save-the-date-text h2 {
+        letter-spacing: 0.25em;
+      }
+      .save-the-date-text .date,
+      .save-the-date-text .location {
+        font-size: 0.95rem;
+        letter-spacing: 0.1em;
+      }
+      footer {
+        padding: 1.5rem 1rem;
+        padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .envelope-text h2 {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+      }
+      .save-the-date-text .names {
+        font-size: 1.6rem;
+      }
+      .links-grid {
+        grid-template-columns: 1fr;
+      }
+      .dress-code {
+        padding: 3rem 1rem;
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+      }
+    }
+
+    /* Touch-friendly: ensure tap targets */
+    @media (hover: none) and (pointer: coarse) {
+      .link-card {
+        min-height: 56px;
+      }
+      .open-btn {
+        padding: 1rem 2rem;
+        min-height: 48px;
+      }
+    }
+
+    /* Integrated dress code in schedule - mobile layout */
+    @media (max-width: 768px) {
+      .integrated-dress-code {
+        margin-top: 1.5rem !important;
+        padding-top: 1.25rem !important;
+      }
+      .integrated-dress-code h5 {
+        font-size: 1rem !important;
+        letter-spacing: 0.1em !important;
+      }
+      .integrated-dress-code img {
+        width: 44px !important;
+        height: 66px !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -718,14 +769,6 @@
         <h3>TRAVEL & ACCOMMODATIONS</h3>
         <p>Everything you need to plan your journey to paradise.</p>
       </a>
-      <a href="#finer-details" class="link-card animate-scale" data-delay="3">
-        <h3>THE FINER DETAILS</h3>
-        <p>What to expect on our magical evening.</p>
-      </a>
-      <a href="#faqs" class="link-card animate-scale" data-delay="4">
-        <h3>FAQs</h3>
-        <p>Answers to the questions we know you'll have.</p>
-      </a>
     </div>
   </section>
 
@@ -756,15 +799,7 @@
     <h2 class="section-heading animate-on-scroll">SCHEDULE & ATTIRE</h2>
     <div class="schedule-timeline">
       
-      <div class="schedule-item animate-fade-left" data-delay="1">
-        <div class="schedule-icon bus"></div>
-        <div class="schedule-text">
-          <h4>Shuttle Departure</h4>
-          <p class="time">Details to follow</p>
-        </div>
-      </div>
-
-      <div class="schedule-item animate-fade-right" data-delay="2">
+      <div class="schedule-item animate-fade-right" data-delay="1">
         <div class="schedule-icon ceremony"></div>
         <div class="schedule-text">
           <h4>Ceremony & Sunset Celebration</h4>
@@ -798,36 +833,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. Our Story -->
-  <section class="our-story scroll-page" id="our-story">
-    <h2 class="section-heading animate-on-scroll">OUR STORY</h2>
-    <div class="story-content animate-on-scroll">
-      <p>It started with a chance encounter—a mutual friend's gathering where laughter flowed as easily as the wine. Khushboo noticed Ashish's quick wit; Ashish was drawn to Khushboo's smile. By the end of the night, they knew they had to see each other again.</p>
-      <p>Their first dates were a blend of adventure and comfort: cozy dinners that stretched for hours, spontaneous road trips, and lazy Sunday mornings that felt like a promise of something more. Every moment together reinforced what they already suspected—this was different.</p>
-      <p>Travel became their love language. From mountains to coastlines, they discovered that the best part of any destination was experiencing it side by side. Rajasthan had always held a special place in their hearts, and when the time came to choose where to say "I do," The Grand Bahubali in Balotra felt like the perfect answer.</p>
-      <p>The proposal was intimate and unforgettable—a private moment by the water as the sun set, with a ring that symbolized the beginning of forever. Now, they can't wait to celebrate that same love with the people who mean the most, in the place that feels like magic.</p>
-    </div>
-  </section>
-
-  <!-- 8. FAQs -->
-  <section class="faqs scroll-page" id="faqs">
-    <h2 class="section-heading animate-on-scroll">FREQUENTLY ASKED QUESTIONS</h2>
-    <div class="faq-list">
-      <div class="faq-item animate-on-scroll" data-delay="1">
-        <div class="faq-question">May I bring a guest?</div>
-        <div class="faq-answer"><p>Due to the intimate nature of our venue and space constraints, we ask that only those specifically named on your invitation attend. We wish we could celebrate with everyone!</p></div>
-      </div>
-      <div class="faq-item animate-on-scroll" data-delay="2">
-        <div class="faq-question">What kind of food will be served?</div>
-        <div class="faq-answer"><p>Expect a rich menu with Indian and regional flavors—seasonal produce and dishes that celebrate the best of Rajasthani hospitality. We're excited to treat you to an unforgettable dining experience.</p></div>
-      </div>
-      <div class="faq-item animate-on-scroll" data-delay="3">
-        <div class="faq-question">Will transportation be provided?</div>
-        <div class="faq-answer"><p>Yes! Shuttles will be available to transport guests to and from the venue. Specific pickup times and locations will be shared closer to the date.</p></div>
       </div>
     </div>
   </section>
