@@ -32,10 +32,11 @@
     }
 
     section.scroll-page {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     }
 
     section {
@@ -283,9 +284,8 @@
 
     /* Quick Links Dashboard */
     .quick-links {
-      padding: 6rem 2rem;
+      padding: 3rem 2rem;
       background: var(--white);
-      min-height: 100vh;
     }
 
     .section-heading {
@@ -294,7 +294,7 @@
       font-weight: 400;
       letter-spacing: 0.15em;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 1.5rem;
     }
 
     .links-grid {
@@ -370,9 +370,8 @@
 
     .rsvp-section,
     .travel-section {
-      padding: 5rem 2rem;
+      padding: 2.5rem 2rem;
       background: var(--white);
-      min-height: 100vh;
     }
 
     .rsvp-section {
@@ -452,22 +451,21 @@
 
     /* Schedule */
     .schedule {
-      padding: 6rem 2rem;
+      padding: 2.5rem 2rem;
       background: var(--black);
       color: var(--white);
-      min-height: 100vh;
     }
 
     .schedule-timeline {
       max-width: 600px;
-      margin: 2rem auto 0;
+      margin: 1rem auto 0;
     }
 
     .schedule-item {
       display: flex;
       align-items: flex-start;
       gap: 2rem;
-      padding: 2rem 0;
+      padding: 1.25rem 0;
       border-bottom: 1px solid rgba(255,255,255,0.15);
     }
 
@@ -611,7 +609,7 @@
       .travel-section,
       .schedule,
       .dress-code {
-        padding: 3rem 1rem;
+        padding: 2rem 1rem;
         padding-left: max(1rem, env(safe-area-inset-left));
         padding-right: max(1rem, env(safe-area-inset-right));
       }
